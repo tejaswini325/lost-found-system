@@ -8,7 +8,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     semester: "",
     email: "",
     mobile: "",
@@ -23,9 +23,9 @@ export default function Login() {
   };
 
   const validateForm = () => {
-    const { fullName, semester, email, mobile, password } = formData;
+    const { name, semester, email, mobile, password } = formData;
 
-    if (!fullName || !semester || !email || !mobile || !password) {
+    if (!name || !semester || !email || !mobile || !password) {
       setMessage("All fields are required!");
       return false;
     }
@@ -47,23 +47,25 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      try {
-        const response = await axios.post(
-          "http://localhost:5000/api/auth/register",
-          formData
-        );
+    if (!validateForm()) return;
 
-        setMessage("Account Created Successfully!");
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        formData
+      );
 
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
+      // Store token
+      localStorage.setItem("token", response.data.token);
 
-      } catch (error) {
-        console.error(error);
-        setMessage("Registration Failed. Try again!");
-      }
+      setMessage("Account Created Successfully!");
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+      setMessage("Registration Failed. Try again!");
     }
   };
 
@@ -81,13 +83,17 @@ export default function Login() {
 
           <input
             type="text"
-            name="fullName"
+            name="name"
             placeholder="Full Name"
-            value={formData.fullName}
+            value={formData.name}
             onChange={handleChange}
           />
 
-          <select name="semester" value={formData.semester} onChange={handleChange}>
+          <select
+            name="semester"
+            value={formData.semester}
+            onChange={handleChange}
+          >
             <option value="">Select Semester</option>
             {[...Array(8)].map((_, i) => (
               <option key={i + 1} value={`Semester ${i + 1}`}>
