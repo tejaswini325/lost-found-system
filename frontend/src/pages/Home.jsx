@@ -68,33 +68,7 @@ const Home = () => {
                 {/* Right Top: Utility Icons */}
                 <div className="utility-icons">
                     
-                    {/* THEME SELECTOR WITH DROPDOWN */}
-                    <div 
-                        className="theme-selector" 
-                        title="Theme"
-                        onClick={toggleThemeMenu}
-                    >
-                        <span className="theme-text">Theme: {theme.charAt(0).toUpperCase() + theme.slice(1)}</span>
-                        
-                        {/* Theme Dropdown Menu */}
-                        {isThemeMenuOpen && (
-                            <div className="theme-dropdown-menu">
-                                <div 
-                                    className="theme-option" 
-                                    onClick={(e) => { e.stopPropagation(); selectTheme('light'); }}
-                                >
-                                    Light
-                                </div>
-                                <div 
-                                    className="theme-option" 
-                                    onClick={(e) => { e.stopPropagation(); selectTheme('dark'); }}
-                                >
-                                    Dark
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                    {/* END THEME SELECTOR */}
+                  
 
                     {/* SETTINGS ICON WITH DROPDOWN */}
                     <div 

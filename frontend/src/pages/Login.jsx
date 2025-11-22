@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Login.css";
-import logoImage from '../assets/logo.png'; // Assuming logo.png is in the same directory
+import logoImage from "../assets/logo.png";
 
 export default function Login() {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullName: "",
     semester: "",
@@ -12,6 +14,7 @@ export default function Login() {
     mobile: "",
     password: "",
   });
+
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
@@ -21,6 +24,7 @@ export default function Login() {
 
   const validateForm = () => {
     const { fullName, semester, email, mobile, password } = formData;
+
     if (!fullName || !semester || !email || !mobile || !password) {
       setMessage("All fields are required!");
       return false;
@@ -40,32 +44,41 @@ export default function Login() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (validateForm()) {
-      setMessage("Created! Login to use website");
-      setTimeout(() => {
-        navigate("/dashboard"); // Redirect to Home.jsx
-      }, 2000);
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/auth/register",
+          formData
+        );
+
+        setMessage("Account Created Successfully!");
+
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 2000);
+
+      } catch (error) {
+        console.error(error);
+        setMessage("Registration Failed. Try again!");
+      }
     }
   };
 
   return (
     <div className="login-page">
-      {/* === Moved Logo Container Here (outside form-container) === */}
       <div className="logo-container">
-        <img 
-          src={logoImage} 
-          alt="KLE Tech Logo" 
-          className="form-logo" 
-        />
+        <img src={logoImage} alt="Logo" className="form-logo" />
       </div>
-      {/* ========================================================= */}
 
       <div className="form-container">
         <h2>Create Account</h2>
         <p>Create a great platform for managing your cases & clients</p>
+
         <form onSubmit={handleSubmit}>
+
           <input
             type="text"
             name="fullName"
@@ -74,11 +87,7 @@ export default function Login() {
             onChange={handleChange}
           />
 
-          <select
-            name="semester"
-            value={formData.semester}
-            onChange={handleChange}
-          >
+          <select name="semester" value={formData.semester} onChange={handleChange}>
             <option value="">Select Semester</option>
             {[...Array(8)].map((_, i) => (
               <option key={i + 1} value={`Semester ${i + 1}`}>
@@ -116,6 +125,7 @@ export default function Login() {
 
           <button type="submit">Create Account</button>
         </form>
+
         {message && <p className="message">{message}</p>}
         <p className="footer-message">All fields are required!</p>
       </div>

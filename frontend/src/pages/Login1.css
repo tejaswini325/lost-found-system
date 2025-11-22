@@ -1,0 +1,173 @@
+/* src/styles/LoginPage.css */
+
+/* --- Base Container for the entire page --- */
+.auth-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  width: 100%;
+  overflow: hidden;
+
+  /* === INTEGRATED FROM INSPO CSS === */
+  position: relative; /* Crucial for absolute positioning of logo and overlay */
+  font-family: "Segoe UI", sans-serif; /* Adopted font from inspiration */
+  background-color: #f0f2f5; 
+  /* ================================= */
+}
+
+/* --- Background Image Overlay --- */
+.background-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Fix: Corrected URL syntax. Changed path to 'kletechbvb_cover.jpeg' 
+     to match the inspiration, assuming you have this file. */
+  background-image: url('kletechbvb_cover.jpeg'); 
+  background-size: cover;
+  background-position: center;
+  /* Removed filter: brightness(0.7); to use the light theme overlay instead */
+  z-index: 1;
+}
+
+/* === NEW: Light theme overlay (Like the inspo's ::before) === */
+.auth-page-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Creating a light, semi-transparent overlay */
+    background: rgba(255, 255, 255, 0.4); 
+    z-index: 1; /* Place above the background image, but below the card */
+}
+
+/* --- LOGO STYLES - Now positioned relative to the page (Header Logo) --- */
+.logo-container-auth {
+  position: absolute;
+  top: 20px; /* Spacing from the top of the page */
+  left: 20px; /* Spacing from the left of the page */
+  z-index: 10; /* Ensure the logo is above the overlay and the form card */
+  margin-bottom: 0; /* No bottom margin needed when absolutely positioned */
+}
+
+.auth-logo {
+  width: 200px; /* Increased size for better visibility on the page */
+  height: auto;
+  display: block;
+  margin: 0; /* Remove auto margin */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for contrast */
+}
+/* ==================================================================== */
+
+/* --- Auth Card Wrapper (for centering the card) --- */
+.auth-card-wrapper {
+  position: relative;
+  z-index: 3; /* Ensure card is above the background and its overlays */
+  padding: 20px;
+}
+
+/* --- The Main Auth Card (Login/Create Account Box) --- */
+.auth-card {
+  /* Using a slight transparency from inspo */
+  background: rgba(255, 255, 255, 0.9); 
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Slightly darker shadow from inspo */
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* --- Titles and Subtitles (Adjusted colors to match inspo) --- */
+.auth-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f3762; /* Darker blue color from inspo */
+  margin-bottom: 10px;
+}
+
+.auth-subtitle {
+  font-size: 0.95rem;
+  color: #4c628f; /* Muted blue color from inspo */
+  margin-bottom: 30px;
+}
+
+/* --- Form Elements --- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  position: relative;
+  text-align: left;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px 15px; /* Slightly adjusted padding */
+  border: 1px solid #ccc; /* Border from inspo */
+  border-radius: 6px; /* Border radius from inspo */
+  font-size: 14px; /* Font size from inspo */
+  color: #333;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.auth-input:focus {
+  border-color: #0a99e6; /* Blue focus color from inspo button */
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(10, 153, 230, 0.25);
+}
+
+/* --- Auth Button --- */
+.auth-button {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #0a99e6; /* Primary blue color from inspo */
+  color: white;
+  border: none;
+  border-radius: 6px; /* Border radius from inspo */
+  font-size: 16px; /* Font size from inspo */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.auth-button:hover {
+  background-color: #087bc4; /* Darker blue on hover from inspo */
+  transform: none; /* Removed slight lift effect for a cleaner look */
+}
+
+/* --- Footer Text for navigation --- */
+.auth-footer-text {
+  font-size: 0.9rem;
+  color: #4c628f; /* Muted blue color from inspo */
+  margin-top: 25px;
+}
+
+.auth-footer-text a {
+  color: #0a99e6; /* Link color from inspo button */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* All other styles (Error Messages, Responsive Adjustments) remain the same */
+/* --- Responsive Adjustments --- */
+@media (max-width: 600px) {
+  .auth-card {
+    padding: 30px 20px;
+    max-width: 90%; /* Allow card to be a bit wider on small screens */
+  }
+
+  .auth-title {
+    font-size: 1.5rem;
+  }
+}
