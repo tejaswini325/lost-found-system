@@ -13,6 +13,7 @@
   --secondary-light-bg: rgba(255, 255, 255, 0.75);
   --highlight-blue: #0a99e6;
   --text-dark: #1f3762;
+  --navy-dark: #071a3c;
   --text-faded: #4c628f;
   font-size: 16px;
 }
@@ -199,7 +200,7 @@ body {
 .main-title {
   font-size: 3.8rem;
   font-weight: 900;
-  color: var(--highlight-blue);
+  color: var(--navy-dark);
   margin-bottom: 1rem;
 }
 

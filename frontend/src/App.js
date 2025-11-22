@@ -8,6 +8,7 @@ import Items from "./pages/Items";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Footbar from "./components/Footbar";
+import Login1 from "./pages/Login1";
 
 // Navbar Component
 import Navbar from "./components/Navbar";
@@ -18,8 +19,7 @@ function AppContent() {
 
   // Define the path(s) where the Navbar should NOT be shown
   // We want to hide it on the Home page, which is at path: "/"
-  const hideNavbarPaths = ['/']; 
-
+const hideNavbarPaths = ['/', '/login', '/login1'];
   // Check if the current path is in the exclusion list
   const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
 
@@ -35,6 +35,7 @@ function AppContent() {
         <Route path="/items" element={<Items />} />
 
         <Route path="/login" element={<Login />} />
+        <Route path="/login1" element={<Login1 />} />
         <Route path="/contact" element={<p>Contact Details Page Placeholder</p>} />
         <Route path="/dashboard" element={<Dashboard />} />
         
