@@ -1,44 +1,69 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Dashboard.css";
+// Assuming you have a component for the global Navigation Bar
+// import Navbar from "../components/Navbar"; 
 import Footer from "../components/Footbar";
-import Image2 from "../assets/img2.jpg"
-import Watch from "../assets/watch.jpg"
+// Assuming 'Watch' is the large, professional image you want to use
+import WatchImage from "../assets/lost-found.jpg";
+// Assuming you have icons or need a section for features, 
+// but for the immediate fix, the main hero section is the priority.
+
 
 const Dashboard = () => {
   return (
     <div className="dashboard-container">
-      <div className="dash-wrapper">
-        <div className="dash-content">
-          <h1 className="dash-title">
-            Find & Recover <br /> <span>With Ease</span>
+      {/* <Navbar /> // Include your Navbar component here */}
+      
+      <div className="dashboard-main-content">
+        {/* --- Left Side: Hero Text & CTA --- */}
+        <div className="hero-section">
+          <h1 className="hero-title">
+            Find & Recover <br /> <span className="highlight-text">With Ease</span>
           </h1>
 
-          <p className="dash-sub">
-            Experience effortless searching & reporting for lost and found items.
+          <p className="hero-subtitle">
+            Experience effortless searching & reporting for lost and found items. 
+            Our platform provides a secure and accountable process for reuniting 
+            people with their misplaced possessions.
           </p>
 
-          <div className="dash-buttons">
-            <button className="btn-lost">Search an Item</button>
-            <Link to="/report-item">
-              <button className="btn-found">Report Lost/Found Item</button>
+          <div className="hero-actions">
+            <Link to="/report-item" className="btn btn-primary">
+              Report Lost/Found Item
+            </Link>
+            {/* Added a secondary CTA for immediate use */}
+            <Link to="/found-items" className="btn btn-secondary">
+              Browse Found Items
             </Link>
           </div>
         </div>
 
-        <div className="dash-cards">
-          <div className="dash-card">
-            <img src={Watch} alt="" />
-            <p>A dedicated place for people to look for and reclaim their misplaced possessions.</p>
-          </div>
+        {/* --- Right Side: Image/Visual (Replaced original card section) --- */}
+        <div className="hero-image-container">
+            {/* The watch image is used as the primary visual element on the side */}
+            <img src={WatchImage} alt="Lost Watch - Found & Recovered" className="hero-image"/>
+        </div>
 
-          <div className="dash-card">
-            <img src={Image2} alt="Found Items" />
-            <p>Enhances security by providing a secure, accountable process for handling items.</p>
+        {/* --- Feature Cards Section (Optional, below the main hero) --- */}
+        {/* You can uncomment this section and add data for a more comprehensive page */}
+        {/*
+        <div className="feature-cards-section">
+          <div className="feature-card">
+            <div className="card-icon icon-search"></div>
+            <h3 className="card-title">Quick Search</h3>
+            <p className="card-text">Search through thousands of reported items instantly.</p>
+          </div>
+          <div className="feature-card">
+            <div className="card-icon icon-secure"></div>
+            <h3 className="card-title">Secure Handoff</h3>
+            <p className="card-text">Trusted process for secure item verification and exchange.</p>
           </div>
         </div>
+        */}
       </div>
-      <Footer />
+      
+      <Footer /> 
     </div>
   );
 };

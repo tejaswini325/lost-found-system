@@ -82,4 +82,3 @@ EOF"**/.cache/"
 "node_modules/.cache/" 
 ".cache/" 
 "package-lock.json" 
-node_modules

@@ -10,8 +10,11 @@ import Dashboard from "./pages/Dashboard";
 import ReportItem from "./pages/ReportItem";
 import Footbar from "./components/Footbar";
 import Login1 from "./pages/Login1";
+<<<<<<< HEAD:src/App.js
 import HelpForm from "./pages/Help";
 
+=======
+>>>>>>> b3ff5091b888643cd4b43749d85566ea33650c43:frontend/src/App.js
 // Navbar Component
 import Navbar from "./components/Navbar";
 
@@ -27,7 +30,11 @@ function AppContent() {
   const location = useLocation();
 
   // Define the path(s) where the Navbar should NOT be shown
+<<<<<<< HEAD:src/App.js
   const hideNavbarPaths = ['/', '/login', '/login1','/contact','/contact?firstName=Lindsay&lastName=Doe&email=lindsay.doe%40email.com&state=Select+state&employees=Number+of+Employees'];
+=======
+  const hideNavbarPaths = ['/', '/login', '/login1'];
+>>>>>>> b3ff5091b888643cd4b43749d85566ea33650c43:frontend/src/App.js
   // Check if the current path is in the exclusion list
   const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
 
@@ -44,7 +51,11 @@ function AppContent() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/login1" element={<Login1 />} />
+<<<<<<< HEAD:src/App.js
         <Route path="/contact" element={<HelpForm />} />
+=======
+        <Route path="/contact" element={<p>Contact Details Page Placeholder</p>} />
+>>>>>>> b3ff5091b888643cd4b43749d85566ea33650c43:frontend/src/App.js
 
         {/* PROTECTED ROUTES - Require Login */}
         <Route
