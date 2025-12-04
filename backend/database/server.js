@@ -3,38 +3,31 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-// Routes
 const authRoutes = require("./routes/auth");
 const itemRoutes = require("./routes/items");
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Database Connection
-const MONGODB_URI = process.env.MONGODB_URI;
-
+// Database
 mongoose
-  .connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log("DB Error:", err));
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/items", itemRoutes);
 
-// Error Handling Middleware
+// Error Handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ message: "Something went wrong!" });
+  res.status(500).json({ message: "Server Error" });
 });
 
-// Start Server
+// Start
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on ${PORT}`));
