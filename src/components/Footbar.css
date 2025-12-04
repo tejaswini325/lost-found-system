@@ -6,5 +6,5 @@
   padding: 14px 0;
   font-size: 14px;
   margin-top: 200px; /* space from dashboard content */
-  position: fixed; /* normal flow */
+  position: normal; /* normal flow */
 }

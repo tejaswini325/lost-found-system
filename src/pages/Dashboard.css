@@ -1,145 +1,173 @@
+/* src/pages/Dashboard.css */
+
+/* --- Base Setup --- */
+body {
+    margin: 0;
+    font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Very light, off-white background */
+    color: #343a40; 
+    line-height: 1.6;
+}
+
+/* --- Container for Sticky Footer --- */
 .dashboard-container {
-  margin-top: 40px;     /* Move content up */
-  padding-bottom: 80px; /* Space before footer */
-  min-height: 80vh;     /* Ensures footer stays at bottom */
-}
-
-.dash-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 60px 80px;
-  background: linear-gradient(120deg, #f6f3f3, #faf6f6);
-  overflow: hidden;
-}
-
-.dash-content {
-  max-width: 500px;
-}
-
-.dash-title {
-  font-size: 58px;
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 5px;
-  color: #222;
-}
-
-.dash-title span {
-  color: #050231;
-}
-
-.dash-sub {
-  font-size: 18px;
-  margin-bottom: 35px;
-  color: #333;
-}
-
-.dash-buttons {
-  display: flex;
-  gap: 18px;
-}
-
-.btn-lost,
-.btn-found {
-  padding: 16px 34px;
-  font-size: 20px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  color: rgb(255, 255, 255);
-  font-weight: 600;
-  transition: 0.25s ease;
-}
-
-/* Button colors */
-.btn-lost {
-  background-color: #041d45;
-}
-
-.btn-found {
-  background-color: #7aa9c6;
-}
-
-/* Hover effect */
-.btn-lost:hover {
-  background-color: #294884;
-}
-
-.btn-found:hover {
-  background-color: #05226b;
-}
-
-/* Active press effect */
-.btn-lost:active,
-.btn-found:active {
-  transform: scale(0.96);
-}
-.dash-cards {
-  display: flex;
-  flex-direction: row;   /* one below another */
-  gap: 170px;
-}
-
-.dash-card {
-  width: 260px;
-  background: rgba(13, 7, 85, 0.45); /* dark glass effect */
-  backdrop-filter: blur(8px);
-  border-radius: 18px;
-  padding: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.dash-card:hover {
-  transform: translateY(-5px) scale(1.03);
-}
-
-.dash-card img {
-  width: 220px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.dash-card p {
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-}
-
-.dash-images {
-  display: flex;
-  gap: 15px;
-}
-
-.dash-images img {
-  width: 180px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.18);
-  transition: transform 0.3s ease;
-}
-
-.dash-images img:hover {
-  transform: translateY(-6px);
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .dash-wrapper {
+    display: flex;
     flex-direction: column;
-    text-align: center;
-  }
+    min-height: 100vh; /* Ensures container covers full viewport height */
+}
 
-  .dash-images {
-    margin-top: 30px;
-  }
+/* --- Main Content Area (Layout) --- */
+.dashboard-main-content {
+    flex-grow: 1; /* Pushes the footer down, takes up remaining space */
+    padding: 80px 50px; /* Generous top/bottom padding */
+    display: flex;
+    gap: 60px; 
+    align-items: center; /* Vertically centers content */
+    max-width: 1400px; 
+    margin: 0 auto; /* Centers content horizontally */
+}
+
+/* --- Left Side: Hero Section (Text & CTA) --- */
+.hero-section {
+    flex: 1.5; /* Takes up more space than the image */
+    padding-right: 20px; 
+}
+
+.hero-title {
+    font-size: 4.5rem; 
+    font-weight: 800; 
+    color: #212529; /* Near black for contrast */
+    margin-bottom: 15px;
+    line-height: 1.05; 
+}
+
+.highlight-text {
+    color: #050142; /* Red Accent */
+    font-weight: 900;
+}
+
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: #6c757d; 
+    margin-bottom: 50px;
+    max-width: 600px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 20px;
+}
+
+/* 💡 BUTTON STYLING */
+.btn {
+    padding: 14px 35px; 
+    border: none;
+    border-radius: 6px; 
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none; 
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+}
+
+/* Primary CTA (Red) */
+.btn-primary {
+    background-color: #090743; 
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #070339; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); 
+}
+
+/* Secondary CTA (Bordered White/Light Blue) */
+.btn-secondary {
+    background-color: #ffffff; 
+    color: #1f3762; /* Dark blue text */
+    border: 2px solid #ced4da; /* Subtle light gray border */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary:hover {
+    background-color: #e9ecef; /* Slight gray background on hover */
+    color: #1f3762; 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Right Side: Single Large Image Container --- */
+.hero-image-container {
+    flex: 3; 
+    max-width: 1000px; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); 
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* --- FOOTER (Sticky Bottom) --- */
+.dashboard-footer {
+    background-color: #1f3762; /* Dark Blue */
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: 20px 40px;
+    font-size: 0.85rem;
+    width: 100%; 
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .dashboard-main-content {
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 30px;
+        text-align: center;
+        gap: 40px;
+    }
+    .hero-section {
+        padding-right: 0;
+    }
+    .hero-actions {
+        justify-content: center;
+    }
+    .hero-title {
+        font-size: 3rem;
+    }
+    .hero-image-container {
+        max-width: 90%; 
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    .hero-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn {
+        width: 100%;
+    }
+    .hero-image-container {
+        max-width: 100%; 
+    }
 }

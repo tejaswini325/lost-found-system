@@ -1,11 +1,10 @@
 /* src/components/Navbar.css */
 
 .navbar-container {
-    /* 💡 CHANGE 1: Use flex properties to align items and distribute space */
     display: flex;
-    justify-content: space-between; /* Keep this to separate brand and links */
+    justify-content: space-between; /* Distributes space between the three main elements/groups */
     align-items: center;
-    background-color: #1f3762; 
+    background-color: #1f3762; /* Dark blue background */
     padding: 10px 40px;
     color: white;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -14,10 +13,11 @@
     z-index: 1000;
 }
 
+/* --- Brand/Logo (Left Side) --- */
 .navbar-brand {
     display: flex;
     align-items: center;
-    /* Optional: Give the brand a fixed size to push the links center */
+    /* Sets a minimum width to visually balance the center link group */
     min-width: 200px; 
 }
 
@@ -26,13 +26,12 @@
     margin-right: 15px;
 }
 
+/* --- Navigation Links (Center) --- */
 .navbar-links {
-    /* 💡 CHANGE 2: Use margin auto to center the links block */
     display: flex;
     gap: 25px;
-    margin: 0 auto; /* Pushes the element to the center of the remaining space */
-    /* Optional: If you want links to be slightly right of center, reduce this: */
-    /* margin-left: 200px; */ 
+    /* 💡 Key to Centering: This pushes the element to the middle of the remaining space */
+    margin: 0 auto; 
 }
 
 .nav-link {
@@ -50,22 +49,28 @@
     color: #a7d9ff;
 }
 
+/* --- Actions/Logout (Right Side) --- */
+.navbar-actions {
+    min-width: 100px; /* Reserves space for the button */
+    text-align: right;
+}
+
 .logout-btn {
     background: none;
     border: none;
     cursor: pointer;
     font-family: inherit;
     font-size: inherit;
+    padding: 0; /* Remove default button padding */
 }
 
-@media (max-width: 900px) { /* Adjust media query for better tablet view */
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
     .navbar-container {
-        flex-direction: row; /* Keep elements in a row */
-        justify-content: space-between;
         padding: 10px 20px;
     }
     .navbar-links {
-        /* Reset centering on smaller screens if they might wrap */
+        /* Reset centering to allow links to group tighter on smaller screens */
         margin: 0; 
         gap: 10px;
     }
@@ -76,14 +81,28 @@
 }
 
 @media (max-width: 768px) {
+    /* Stack elements vertically on mobile */
     .navbar-container {
-        flex-direction: column; /* Stack logo and links vertically */
+        flex-direction: column;
         align-items: flex-start;
         padding-bottom: 15px;
     }
+    
     .navbar-links {
+        width: 100%;
         margin-top: 15px;
         flex-wrap: wrap;
         gap: 10px;
+        justify-content: flex-start;
+    }
+    
+    .navbar-actions {
+        width: 100%;
+        text-align: left;
+        margin-top: 10px;
+    }
+    
+    .navbar-brand {
+        min-width: auto;
     }
 }

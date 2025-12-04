@@ -21,3 +21,64 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+# Create .gitignore
+cat > .gitignore << 'EOF'
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+.out/
+.next/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Cache
+.cache/
+*.cache
+
+# Test coverage
+coverage/
+
+# Package manager files
+package-lock.json
+yarn.lock
+
+# Frontend specific
+frontend/node_modules/
+frontend/.cache/
+frontend/build/
+
+# Backend specific
+backend/node_modules/
+backend/.cache/
+backend/help_fallback.log
+EOF"**/.cache/" 
+"**/node_modules/.cache/" 
+"frontend/frontend/node_modules/.cache/" 
+"node_modules/.cache/" 
+".cache/" 
+"package-lock.json" 

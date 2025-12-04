@@ -44,7 +44,7 @@ const Login1 = () => {
         if (data.message === "User not found") {
           // If user not found, redirect to the create account page (assuming it's '/create-account')
           setError("Email not found. Redirecting to create account...");
-          setTimeout(() => navigate("/login"), 2000); 
+          setTimeout(() => navigate("/create-account"), 2000); 
           return;
         }
 
@@ -123,7 +123,7 @@ const Login1 = () => {
           </form>
 
           <p className="auth-footer-text">
-            New user? <Link to="/login">Create Account</Link> 
+            New user? <Link to="/create-account">Create Account</Link> 
             {/* Note: Changed <a> to <Link> and path to '/create-account' for React Router */}
           </p>
         </div>
