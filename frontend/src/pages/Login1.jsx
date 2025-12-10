@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login1.css";
 import { useNavigate } from "react-router-dom";
 import logoImage from "../assets/logo.png";
-import { Link } from "react-router-dom"; // Import Link for proper routing
+import { Link } from "react-router-dom";
 
 const Login1 = () => {
   const navigate = useNavigate();
@@ -14,20 +14,21 @@ const Login1 = () => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // Handle Input Change
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    setError(""); // Clear error when typing
   };
 
-  // Handle Login Submit
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setLoading(true);
 
     try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
@@ -42,29 +43,40 @@ const Login1 = () => {
 
       if (!response.ok) {
         if (data.message === "User not found") {
-          // If user not found, redirect to the create account page (assuming it's '/create-account')
-          setError("Email not found. Redirecting to create account...");
-          setTimeout(() => navigate("/create-account"), 2000); 
+          setError("Email not found. Creating new account...");
+          setTimeout(() => navigate("/login"), 2000);
           return;
         }
-
         setError(data.message || "Login failed");
         return;
       }
 
-      localStorage.setItem("token", data.token);
-      setSuccess("Login Successful! Redirecting...");
-      setTimeout(() => navigate("/dashboard"), 1500);
+      if (data.success) {
+        // Store token and user data
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userName", data.user.name);
+        localStorage.setItem("userEmail", data.user.email);
+        localStorage.setItem("userPhone", data.user.phone || "");
+        localStorage.setItem("userEnrollment", data.user.enrollment || "");
+        localStorage.setItem("userSemester", data.user.semester || "");
+        localStorage.setItem("userBranch", data.user.branch || "");
+        localStorage.setItem("userYear", data.user.year || "");
 
+        setSuccess("Login Successful! Redirecting...");
+        setTimeout(() => navigate("/dashboard"), 1500);
+      } else {
+        setError(data.message || "Login failed");
+      }
     } catch (err) {
+      console.error("Login error:", err);
       setError("Server error. Please try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="auth-page-container">
-      
-      {/* 💡 CORRECTED LOGO PLACEMENT: Moved outside the auth-card-wrapper */}
       <div className="logo-container">
         <img src={logoImage} alt="Logo" className="form-logo" />
       </div>
@@ -73,13 +85,9 @@ const Login1 = () => {
 
       <div className="auth-card-wrapper">
         <div className="auth-card">
-          
-          {/* REMOVED: The logo placement here to fix the structural issue */}
-
           <h2 className="auth-title">Login</h2>
           <p className="auth-subtitle">Access your account</p>
 
-          {/* Display Errors */}
           {error && (
             <div className="general-error-message error">
               {error}
@@ -102,6 +110,7 @@ const Login1 = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                disabled={loading}
               />
             </div>
 
@@ -114,17 +123,17 @@ const Login1 = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
+                disabled={loading}
               />
             </div>
 
-            <button className="auth-button" type="submit">
-              Login
+            <button className="auth-button" type="submit" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
 
           <p className="auth-footer-text">
-            New user? <Link to="/create-account">Create Account</Link> 
-            {/* Note: Changed <a> to <Link> and path to '/create-account' for React Router */}
+            New user? <Link to="/login">Create Account</Link>
           </p>
         </div>
       </div>

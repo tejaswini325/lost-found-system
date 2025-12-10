@@ -1,22 +1,31 @@
 const express = require("express");
-const { registerUser, loginUser } = require("../controllers/authController");
-const User = require("../models/User");
+const { registerUser, loginUser, getCurrentUser, updateProfile } = require("../controllers/authController");
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
-// Register API
+// Public routes
 router.post("/register", registerUser);
-
-// Login API
 router.post("/login", loginUser);
 
-// Get All Users (for testing database insert)
+// Protected routes (need token)
+router.get("/me", auth, getCurrentUser);
+router.put("/update", auth, updateProfile);
+
+// Get All Users (for testing - optional)
 router.get("/all", async (req, res) => {
   try {
-    const users = await User.find(); // Fetch all users
-    res.json(users);  // Return as response
+    const User = require("../models/User");
+    const users = await User.find().select('-password');
+    res.json({
+      success: true,
+      users
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
   }
 });
 
