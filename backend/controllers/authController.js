@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
 
 // REGISTER USER (Updated)
 exports.registerUser = async (req, res) => {
@@ -60,27 +61,39 @@ exports.registerUser = async (req, res) => {
 };
 
 // LOGIN USER (Updated to return user data)
-exports.loginUser = async (req, res) => {
+exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    
+    console.log("🔧 Login attempt:", { email });
 
-    // Check user
+    // Check if user exists
     const user = await User.findOne({ email });
-    if (!user)
-      return res.status(400).json({
+    if (!user) {
+      console.log("❌ User not found for login:", email);
+      return res.status(404).json({
         success: false,
-        message: "User not found"
+        message: 'User not found'
       });
+    }
 
-    // Compare password (bcrypt)
+    console.log("✅ User found for login");
+    console.log("📝 Stored password hash:", user.password.substring(0, 30) + "...");
+
+    // Check password
     const isMatch = await user.comparePassword(password);
-    if (!isMatch)
+    console.log("🔑 Password match result:", isMatch);
+    console.log("🔑 Provided password:", password);
+
+    if (!isMatch) {
+      console.log("❌ Invalid password for:", email);
       return res.status(400).json({
         success: false,
-        message: "Invalid credentials"
+        message: 'Invalid credentials'
       });
+    }
 
-    // JWT
+    // JWT Payload
     const payload = {
       userId: user._id
     };
@@ -89,7 +102,7 @@ exports.loginUser = async (req, res) => {
       expiresIn: "7d"
     });
 
-    // Return user data
+    // Return user data along with token
     res.json({
       success: true,
       message: "Login successful",
@@ -105,11 +118,12 @@ exports.loginUser = async (req, res) => {
         enrollment: user.enrollment || ""
       }
     });
+
   } catch (error) {
-    console.error("Login error:", error);
+    console.error('Login error:', error);
     res.status(500).json({
       success: false,
-      message: "Server error during login"
+      message: 'Server error'
     });
   }
 };
@@ -149,6 +163,71 @@ exports.getCurrentUser = async (req, res) => {
   }
 };
 
+// Verify email
+exports.verifyEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    console.log("🔧 Verify email request:", email);
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Email not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Email verified'
+    });
+
+  } catch (error) {
+    console.error("❌ Verify email error:", error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
+    });
+  }
+};
+
+// Reset password
+
+exports.resetPassword = async (req, res) => {
+  try {
+    const { email, newPassword } = req.body;
+
+    // Hash new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    
+    // Use findOneAndUpdate which bypasses middleware/hooks
+    const user = await User.findOneAndUpdate(
+      { email },
+      { password: hashedPassword },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Password reset successfully'
+    });
+
+  } catch (error) {
+    console.error("❌ Reset password error:", error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
+    });
+  }
+};
 // UPDATE USER PROFILE
 exports.updateProfile = async (req, res) => {
   try {
