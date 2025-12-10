@@ -14,7 +14,7 @@ const itemSchema = new mongoose.Schema({
     enum: [
       'Electronics', 'Documents', 'Accessories',
       'Books', 'Clothing', 'Wallet/Purse',
-      'Keys', 'Bags', 'Stationery', 'Other'
+      'Keys', 'Bags', 'Stationery', 'Headphones', 'Other'
     ]
   },
   location: { type: String, required: true },
