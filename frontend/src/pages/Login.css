@@ -1,6 +1,6 @@
 /* Login.css - Create Account Page */
 .login-page {
-  background: url("../assets/kletechbvb_cover.jpeg") no-repeat center center fixed;
+  background: url("kletechbvb_cover.jpeg") no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   display: flex;

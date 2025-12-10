@@ -1,6 +1,6 @@
 /* Login1.css - Login Page */
 .auth-page-container {
-  background: url("../assets/kletechbvb_cover.jpeg") no-repeat center center fixed;
+  background: url("kletechbvb_cover.jpeg") no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   display: flex;
@@ -38,7 +38,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Auth Card Wrapper - FIXED */
+/* Auth Card Wrapper */
 .auth-card-wrapper {
   display: flex;
   justify-content: center;
@@ -127,7 +127,7 @@
   cursor: not-allowed;
 }
 
-/* Message Styles - FIXED */
+/* Message Styles */
 .general-error-message {
   margin-top: 15px;
   padding: 10px;
