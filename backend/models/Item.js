@@ -8,7 +8,27 @@ const itemSchema = new mongoose.Schema({
     required: true,
     enum: ['lost', 'found']
   },
-
+  itemType: {
+    type: String,
+    required: true,
+    enum: [
+      'Mobile Phone', 'Laptop', 'Tablet', 'Headphones', 'Charger', 'Power Bank',
+      'Wallet', 'Purse', 'ID Card', 'Student ID', 'Driver License', 'Passport',
+      'Keys', 'House Keys', 'Car Keys', 'Bike Keys',
+      'Books', 'Notebooks', 'Textbooks', 'Study Material',
+      'Water Bottle', 'Lunch Box', 'Tiffin Box',
+      'Jacket', 'Sweater', 'Cap', 'Scarf', 'Gloves',
+      'Bag', 'Backpack', 'Handbag', 'Laptop Bag',
+      'Watch', 'Bracelet', 'Necklace', 'Earrings',
+      'Glasses', 'Sunglasses', 'Spectacles',
+      'Sports Equipment', 'Cricket Bat', 'Football', 'Badminton Racket',
+      'Calculator', 'Pen Drive', 'Hard Disk',
+      'Umbrella', 'Raincoat',
+      'Other Electronics',
+      'Other Accessories',
+      'Other Personal Items'
+    ]
+  },
   location: { type: String, required: true },
   exactLocation: { type: String, default: "" },
   date: { type: Date, required: true },
@@ -50,4 +70,4 @@ const itemSchema = new mongoose.Schema({
 // Add text index for search
 itemSchema.index({ title: 'text', description: 'text', keywords: 'text' });
 
-module.exports = mongoose.model("Item", itemSchema);
+module.exports = mongoose.model('Item', itemSchema);
