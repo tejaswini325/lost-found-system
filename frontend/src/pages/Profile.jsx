@@ -2,6 +2,13 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
+import graduationIcon from './graduate-hat.svg'; 
+import user from './user.svg'; // This imports as URL
+import phone from './phone.svg'; // This imports as URL
+import mail from './communication.svg'; // This imports as URL
+import calendar from './calendar.svg'; // This imports as URL
+import books from './book-stack.svg'; // This imports as URL
+import building from './university.svg'; // This imports as URL
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -175,9 +182,7 @@ const Profile = () => {
                         <button className="edit-profile-btn" onClick={handleEdit}>
                             ✏️ Edit Profile
                         </button>
-                        <button className="logout-btn" onClick={handleLogout}>
-                            Logout
-                        </button>
+                        
                     </div>
                 </div>
 
@@ -268,11 +273,13 @@ const Profile = () => {
                                         >
                                             <option value="">Select Branch</option>
                                             <option value="Computer Science">Computer Science</option>
-                                            <option value="Information Technology">Information Technology</option>
+                                            <option value="Computer Science(AI)">Computer Science(AI)</option>
+                                            <option value="Electronics">Electronics</option>
+                                            <option value="Electronics (VLSI)">Electronics (VLSI)</option>
                                             <option value="Mechanical">Mechanical</option>
                                             <option value="Civil">Civil</option>
                                             <option value="Electrical">Electrical</option>
-                                            <option value="Electronics">Electronics</option>
+                                            <option value="BioTech">BioTech</option>
                                         </select>
                                     </div>
                                     <div className="form-group">
@@ -310,49 +317,49 @@ const Profile = () => {
                         ) : (
                             <div className="info-grid">
                                 <div className="info-card">
-                                    <div className="info-icon">👤</div>
+                                    <div className="info-icon"><img src={user} alt="Graduation" width="50" height="50" /></div>
                                     <div className="info-content">
                                         <label>Full Name</label>
                                         <p>{userData.name}</p>
                                     </div>
                                 </div>
                                 <div className="info-card">
-                                    <div className="info-icon">📧</div>
+                                    <div className="info-icon"><img src={mail} alt="Graduation" width="50" height="50" /></div>
                                     <div className="info-content">
                                         <label>Email</label>
                                         <p>{userData.email}</p>
                                     </div>
                                 </div>
                                 <div className="info-card">
-                                    <div className="info-icon">📱</div>
+                                    <div className="info-icon"><img src={phone} alt="Graduation" width="50" height="50" /></div>
                                     <div className="info-content">
                                         <label>Phone</label>
                                         <p>{userData.phone}</p>
                                     </div>
                                 </div>
                                 <div className="info-card">
-                                    <div className="info-icon">🎓</div>
+                                    <div className="info-icon"><img src={graduationIcon} alt="Graduation" width="50" height="50" /></div>
                                     <div className="info-content">
                                         <label>Enrollment No</label>
                                         <p>{userData.enrollment}</p>
                                     </div>
                                 </div>
                                 <div className="info-card">
-                                    <div className="info-icon">📚</div>
+                                    <div className="info-icon"><img src={books} alt="Graduation" width="50" height="50" /></div>
                                     <div className="info-content">
                                         <label>Semester</label>
                                         <p>{userData.semester}</p>
                                     </div>
                                 </div>
                                 <div className="info-card">
-                                    <div className="info-icon">🏛️</div>
+                                    <div className="info-icon"><img src={building} alt="Graduation" width="50" height="50" /></div>
                                     <div className="info-content">
                                         <label>Branch</label>
                                         <p>{userData.branch}</p>
                                     </div>
                                 </div>
                                 <div className="info-card">
-                                    <div className="info-icon">📅</div>
+                                    <div className="info-icon"><img src={calendar} alt="Graduation" width="50" height="50" /></div>
                                     <div className="info-content">
                                         <label>Year</label>
                                         <p>{userData.year}</p>
