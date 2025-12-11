@@ -13,6 +13,7 @@ import HelpForm from "./pages/Help";
 import Profile from "./pages/Profile";
 import Footbar from "./components/Footbar";
 import Login1 from "./pages/Login1";
+import MyItems from "./pages/MyItems";
 
 // Navbar Component
 import Navbar from "./components/Navbar";
@@ -34,7 +35,7 @@ function AppContent() {
   const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
 
   // Define paths where Footbar should NOT be shown
-  const hideFootbarPaths = ['/','/login','/login1','/contact'];
+  const hideFootbarPaths = ['/', '/login', '/login1', '/contact'];
   const shouldShowFootbar = !hideFootbarPaths.includes(location.pathname);
 
   return (
@@ -57,6 +58,14 @@ function AppContent() {
           element={
             <PrivateRoute>
               <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/my-items"
+          element={
+            <PrivateRoute>
+              <MyItems />
             </PrivateRoute>
           }
         />
