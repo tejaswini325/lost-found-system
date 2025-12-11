@@ -97,7 +97,7 @@ exports.reportItem = async (req, res) => {
       console.log("Image saved at:", imageUrl);
     }
 
-    // Create new item
+    // Create new item - CRITICAL: Make sure userId is saved
     const newItem = new Item({
       title,
       description,
@@ -111,13 +111,19 @@ exports.reportItem = async (req, res) => {
       brand: brand || "",
       image: imageUrl,
       keywords,
-      userId,
+      userId: userId, // This is the most important line
       userName: user.name,
-      userEmail: user.email
+      userEmail: user.email,
+      status: 'pending'
     });
 
     await newItem.save();
-    console.log("Item saved successfully. ID:", newItem._id);
+    console.log("✅ Item saved successfully!");
+    console.log("Item ID:", newItem._id);
+    console.log("Item saved with userId:", newItem.userId);
+    console.log("Item title:", newItem.title);
+    console.log("Item category:", newItem.category);
+    console.log("Full item:", JSON.stringify(newItem, null, 2));
 
     // Find potential matches
     const oppositeCategory = category === 'lost' ? 'found' : 'lost';
@@ -200,6 +206,7 @@ exports.reportItem = async (req, res) => {
 
     console.log("=== REPORT ITEM COMPLETE ===");
     console.log("Matches found:", matchesFound.length);
+    console.log("Item status:", newItem.status);
 
     res.status(201).json({
       success: true,
@@ -226,7 +233,7 @@ exports.getUserItems = async (req, res) => {
     const items = await Item.find({ userId: req.userId })
       .sort({ createdAt: -1 });
 
-    console.log(`Found ${items.length} items for user`);
+    console.log(`Found ${items.length} items for user ${req.userId}`);
 
     res.json({
       success: true,
@@ -454,9 +461,21 @@ exports.getStats = async (req, res) => {
     const userId = req.userId;
 
     console.log("=== GET STATS START ===");
-    console.log("User ID:", userId);
+    console.log("User ID for stats:", userId);
+    console.log("Type of userId:", typeof userId);
 
-    // Count all items for this user
+    // Debug: Check if user exists
+    const userExists = await User.findById(userId);
+    console.log("User exists:", userExists ? "YES" : "NO");
+
+    if (!userExists) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
+    }
+
+    // Count all items for this user - Using userId field
     const totalItems = await Item.countDocuments({ userId: userId }) || 0;
     const lostItems = await Item.countDocuments({
       userId: userId,
@@ -478,7 +497,7 @@ exports.getStats = async (req, res) => {
     // Calculate recovery rate
     let recoveryRate = 0;
     if (lostItems > 0) {
-      recoveryRate = parseFloat(((returnedItems / lostItems) * 100).toFixed(1));
+      recoveryRate = Math.round((returnedItems / lostItems) * 100);
     }
 
     console.log("Stats calculated:", {
@@ -493,9 +512,19 @@ exports.getStats = async (req, res) => {
     // Debug: Show all items for this user
     const allUserItems = await Item.find({ userId: userId });
     console.log(`Total user items in DB: ${allUserItems.length}`);
-    allUserItems.forEach(item => {
-      console.log(`- ${item.title} (${item.category}, ${item.status})`);
-    });
+
+    if (allUserItems.length > 0) {
+      allUserItems.forEach(item => {
+        console.log(`- "${item.title}" (${item.category}, ${item.status}, userId: ${item.userId})`);
+      });
+    } else {
+      console.log("No items found for this user. Checking all items in database...");
+      const allItems = await Item.find({});
+      console.log(`Total items in entire database: ${allItems.length}`);
+      allItems.forEach(item => {
+        console.log(`- "${item.title}" (${item.category}, userId: ${item.userId})`);
+      });
+    }
 
     console.log("=== GET STATS COMPLETE ===");
 
@@ -534,6 +563,7 @@ exports.debugAllItems = async (req, res) => {
       console.log(`  Category: ${item.category}`);
       console.log(`  User ID: ${item.userId}`);
       console.log(`  User Name: ${item.userName}`);
+      console.log(`  Status: ${item.status}`);
       console.log(`  Created: ${item.createdAt}`);
       console.log(`---`);
     });
@@ -559,5 +589,32 @@ exports.debugAllItems = async (req, res) => {
       success: false,
       error: error.message
     });
+  }
+};
+
+// Test route to check user's items
+exports.testUserItems = async (req, res) => {
+  try {
+    const userId = req.userId;
+    console.log("=== TEST USER ITEMS ===");
+    console.log("User ID:", userId);
+
+    const items = await Item.find({ userId: userId });
+
+    res.json({
+      success: true,
+      userId: userId,
+      itemCount: items.length,
+      items: items.map(item => ({
+        id: item._id,
+        title: item.title,
+        category: item.category,
+        status: item.status
+      }))
+    });
+
+  } catch (error) {
+    console.error("Test error:", error);
+    res.status(500).json({ success: false, error: error.message });
   }
 };

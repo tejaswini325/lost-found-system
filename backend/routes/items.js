@@ -55,6 +55,8 @@ router.get("/stats/my", auth, itemController.getStats);
 
 // === ADD THIS LINE FOR DEBUGGING ===
 router.get("/debug/all", itemController.debugAllItems);
+// Add this line in your routes/items.js
+router.get("/test/my-items", auth, itemController.testUserItems);
 // ===================================
 
 module.exports = router;
