@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Bell, MessageSquare, Search, CheckCircle, BarChart, Clock } from "lucide-react";
+import { Bell, MessageSquare } from "lucide-react";
 import axios from "axios";
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const userName = localStorage.getItem("userName") || "Student";
-  const [stats, setStats] = useState({
-    totalItems: 0,
-    lostItems: 0,
-    foundItems: 0,
-    returnedItems: 0,
-    matchedItems: 0,
-    recoveryRate: 0
-  });
   const [recentItems, setRecentItems] = useState([]);
   const [notifications, setNotifications] = useState([]);
 
@@ -24,10 +16,7 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem("token");
-      const [statsRes, itemsRes, notifRes] = await Promise.all([
-        axios.get("http://localhost:5000/api/items/stats/my", {
-          headers: { "x-auth-token": token }
-        }),
+      const [itemsRes, notifRes] = await Promise.all([
         axios.get("http://localhost:5000/api/items/my-items", {
           headers: { "x-auth-token": token }
         }),
@@ -36,7 +25,6 @@ const Dashboard = () => {
         })
       ]);
 
-      if (statsRes.data.success) setStats(statsRes.data.stats);
       if (itemsRes.data.success) setRecentItems(itemsRes.data.items.slice(0, 3));
       if (notifRes.data.success) setNotifications(notifRes.data.notifications.slice(0, 5));
     } catch (error) {
@@ -103,58 +91,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-icon total">
-              <BarChart size={24} />
-            </div>
-            <div className="stat-info">
-              <h3>{stats.totalItems}</h3>
-              <p>Total Reports</p>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon lost">
-              <Clock size={24} />
-            </div>
-            <div className="stat-info">
-              <h3>{stats.lostItems}</h3>
-              <p>Lost Items</p>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon found">
-              <Search size={24} />
-            </div>
-            <div className="stat-info">
-              <h3>{stats.foundItems}</h3>
-              <p>Found Items</p>
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon returned">
-              <CheckCircle size={24} />
-            </div>
-            <div className="stat-info">
-              <h3>{stats.returnedItems}</h3>
-              <p>Returned</p>
-            </div>
-          </div>
-          <div className="stat-card large">
-            <div className="stat-info">
-              <h3>{stats.recoveryRate}%</h3>
-              <p>Recovery Rate</p>
-            </div>
-            <div className="progress-bar">
-              <div
-                className="progress-fill"
-                style={{ width: `${stats.recoveryRate}%` }}
-              ></div>
-            </div>
-          </div>
-        </div>
-
         {/* Recent Activity & Notifications */}
         <div className="content-row">
           <div className="recent-activity">
@@ -216,9 +152,6 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-
-        {/* Quick Links */}
-
       </div>
     </div>
   );
