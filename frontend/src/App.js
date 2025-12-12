@@ -14,7 +14,14 @@ import Profile from "./pages/Profile";
 import Footbar from "./components/Footbar";
 import Login1 from "./pages/Login1";
 import MyItems from "./pages/MyItems";
-
+import AdminLogin from './admin/pages/AdminLogin';
+import AdminDashboard from './admin/pages/AdminDashboard';
+import PendingItems from './admin/pages/PendingItems';
+import AllItems from './admin/pages/AllItems';
+import Users from './admin/pages/Users';
+import Reports from './admin/pages/Reports';
+import Settings from './admin/pages/Settings';
+import Analytics from './admin/pages/Analytics';
 // Navbar Component
 import Navbar from "./components/Navbar";
 
@@ -51,7 +58,14 @@ function AppContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/login1" element={<Login1 />} />
         <Route path="/contact" element={<HelpForm />} />
-
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/pending" element={<PendingItems />} />
+        <Route path="/admin/all-items" element={<AllItems />} />
+        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/reports" element={<Reports />} />
+        <Route path="/admin/settings" element={<Settings />} />
+        <Route path="/admin/analytics" element={<Analytics />} />
         {/* PROTECTED ROUTES - Require Login */}
         <Route
           path="/dashboard"
