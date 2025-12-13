@@ -51,16 +51,6 @@ function AppContent() {
       {shouldShowNavbar && <Navbar />}
 
       <Routes>
-        {/* ===== ADMIN ROUTES ===== */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/pending" element={<PendingItems />} />
-        <Route path="/admin/all-items" element={<AllItems />} />
-        <Route path="/admin/users" element={<Users />} />
-        <Route path="/admin/reports" element={<Reports />} />
-        <Route path="/admin/settings" element={<Settings />} />
-        <Route path="/admin/analytics" element={<Analytics />} />
-
         {/* ===== USER ROUTES ===== */}
         <Route path="/" element={<Home />} />
         <Route path="/lost" element={<Lost />} />
@@ -70,7 +60,6 @@ function AppContent() {
         <Route path="/login1" element={<Login1 />} />
         <Route path="/contact" element={<HelpForm />} />
 
-        {/* ===== PROTECTED ROUTES ===== */}
         <Route
           path="/dashboard"
           element={
@@ -88,6 +77,16 @@ function AppContent() {
             </PrivateRoute>
           }
         />
+
+        {/* ===== ADMIN ROUTES ===== */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/pending" element={<PendingItems />} />
+        <Route path="/admin/all-items" element={<AllItems />} />
+        <Route path="/admin/users" element={<Users />} />
+        <Route path="/admin/reports" element={<Reports />} />
+        <Route path="/admin/settings" element={<Settings />} />
+        <Route path="/admin/analytics" element={<Analytics />} />
 
         {/* Optional */}
         <Route path="/footbar" element={<Footbar />} />

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,6 +20,8 @@ import Login1 from "./pages/Login1";
 import Dashboard from "./pages/Dashboard";
 import MyItems from "./pages/MyItems";
 import HelpForm from "./pages/Help";
+import ReportItem from "./pages/ReportItem";
+import Profile from "./pages/Profile";
 
 /* ===== ADMIN PAGES ===== */
 import AdminLogin from "./admin/pages/AdminLogin";
@@ -34,7 +37,7 @@ import Analytics from "./admin/pages/Analytics";
 import Navbar from "./components/Navbar";
 import Footbar from "./components/Footbar";
 
-/* ===== PRIVATE ROUTE FOR USERS ===== */
+/* ===== PRIVATE ROUTE (USER) ===== */
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem("token");
   return token ? children : <Navigate to="/login" />;
@@ -54,7 +57,7 @@ function AppContent() {
       {shouldShowNavbar && <Navbar />}
 
       <Routes>
-        {/* ===== USER ROUTES ===== */}
+        {/* USER ROUTES */}
         <Route path="/" element={<Home />} />
         <Route path="/lost" element={<Lost />} />
         <Route path="/found" element={<Found />} />
@@ -81,7 +84,25 @@ function AppContent() {
           }
         />
 
-        {/* ===== ADMIN ROUTES ===== */}
+        <Route
+          path="/report-item"
+          element={
+            <PrivateRoute>
+              <ReportItem />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+
+        {/* ADMIN ROUTES */}
         <Route path="/admin/login" element={<AdminLogin />} />
 
         <Route
@@ -146,10 +167,9 @@ function AppContent() {
             </ProtectedRoute>
           }
         />
-
-        {/* Optional */}
-        <Route path="/footbar" element={<Footbar />} />
       </Routes>
+
+      <Footbar />
     </>
   );
 }
