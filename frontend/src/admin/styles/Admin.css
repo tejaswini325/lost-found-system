@@ -1,0 +1,308 @@
+/* Dashboard Styles */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+.dashboard-container {
+    padding: 30px;
+    max-width: 1600px;
+    margin: 0 auto;
+    font-family: 'Outfit', sans-serif;
+    background-color: #f0f7ff;
+    min-height: 100vh;
+}
+
+/* ================= HEADER ================= */
+.dashboard-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 24px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(79, 172, 254, 0.3);
+}
+
+.header-content h1 {
+    margin: 0;
+    font-size: 2.8rem;
+    font-weight: 700;
+}
+
+.welcome-text {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.last-login {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    background: rgba(255,255,255,0.2);
+    padding: 6px 15px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* ================= STATS ================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+}
+
+.stat-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.stat-title {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    text-transform: uppercase;
+}
+
+/* ================= LAYOUT ================= */
+.admin-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #f0f7ff;
+}
+
+.admin-navbar {
+    height: 80px;
+    background: white;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+}
+
+.admin-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.admin-main-content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    width: 280px;
+    background: linear-gradient(180deg, #1e3c72, #2a5298);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    border-radius: 30px;
+}
+
+.sidebar-header {
+    padding: 30px;
+    font-weight: 700;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 20px;
+}
+
+.nav-link {
+    display: flex;
+    gap: 15px;
+    padding: 14px 20px;
+    border-radius: 14px;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: all 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: white;
+    color: #1e3c72;
+    font-weight: 700;
+}
+
+.sidebar-footer {
+    padding: 20px;
+}
+
+/* ================= BUTTONS ================= */
+.btn {
+    padding: 12px 26px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+}
+
+.btn-secondary {
+    background: white;
+    border: 2px solid #eef2f7;
+    color: #1e3c72;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+/* ================= TABLES ================= */
+.table-responsive {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    overflow: hidden;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th {
+    background: #f8f9fa;
+    padding: 18px 30px;
+    font-size: 0.85rem;
+    color: #7f8c8d;
+}
+
+.admin-table td {
+    padding: 18px 30px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+/* ================= BADGES ================= */
+.badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.badge-lost {
+    background: #ffeaa7;
+    color: #d35400;
+}
+
+.badge-found {
+    background: #d5f4e6;
+    color: #27ae60;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.status-pending { background: #fff3cd; }
+.status-approved { background: #d4edda; }
+.status-rejected { background: #f8d7da; }
+
+/* ================= GRID / CARDS ================= */
+.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.item-card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.item-card-content {
+    padding: 20px;
+}
+
+/* ================= LOGIN ================= */
+.admin-login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+}
+
+.admin-login-card {
+    background: white;
+    padding: 60px;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 18px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+    font-size: 1.1rem;
+}
+
+/* ================= LOADING ================= */
+.loading-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #e0eaff;
+    border-top: 4px solid #4facfe;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
