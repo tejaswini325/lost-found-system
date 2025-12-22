@@ -1,8 +1,9 @@
-const User = require("../models/User");
-const jwt = require("jsonwebtoken");
+import User from "../models/User.js";
+import jwt from "jsonwebtoken";
 
 // REGISTER USER - FIXED TO SAVE ALL FIELDS
-exports.registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
+
   try {
     console.log("Registration request received:", req.body);
 
@@ -92,7 +93,8 @@ exports.registerUser = async (req, res) => {
 };
 
 // LOGIN USER - FIXED TO RETURN ALL FIELDS
-exports.loginUser = async (req, res) => {
+export const loginUser = async (req, res) => {
+
   try {
     console.log("Login attempt for:", req.body.email);
 
@@ -164,7 +166,8 @@ exports.loginUser = async (req, res) => {
 };
 
 // GET CURRENT USER PROFILE
-exports.getCurrentUser = async (req, res) => {
+export const getCurrentUser = async (req, res) => {
+
   try {
     const user = await User.findById(req.userId).select('-password');
 
@@ -207,7 +210,8 @@ exports.getCurrentUser = async (req, res) => {
 };
 
 // UPDATE USER PROFILE
-exports.updateProfile = async (req, res) => {
+export const updateProfile = async (req, res) => {
+
   try {
     const { name, phone, semester, branch, year, enrollment } = req.body;
 
@@ -247,7 +251,8 @@ exports.updateProfile = async (req, res) => {
 };
 
 // VERIFY EMAIL (for forgot password)
-exports.verifyEmail = async (req, res) => {
+export const verifyEmail = async (req, res) => {
+
   try {
     const { email } = req.body;
 
@@ -274,7 +279,8 @@ exports.verifyEmail = async (req, res) => {
 };
 
 // RESET PASSWORD
-exports.resetPassword = async (req, res) => {
+export const resetPassword = async (req, res) => {
+
   try {
     const { email, newPassword } = req.body;
 
@@ -305,7 +311,8 @@ exports.resetPassword = async (req, res) => {
 };
 
 // GET ALL USERS (for testing)
-exports.getAllUsers = async (req, res) => {
+export const getAllUsers = async (req, res) => {
+
   try {
     const users = await User.find().select('-password');
 

@@ -1,13 +1,18 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const path = require("path");
+import "dotenv/config.js";
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
 
 // Routes
-const authRoutes = require("./routes/auth");
-const itemRoutes = require("./routes/items");
-const adminRoutes = require("./routes/admin");
+import authRoutes from "./routes/auth.js";
+import itemRoutes from "./routes/items.js";
+import adminRoutes from "./routes/admin.js";
+import notificationRoutes from "./routes/Notification.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -20,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Database Connection
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://LF_db_user:EojgXh2EKr1AtLkq@cluster0.ewobb1o.mongodb.net/?appName=Cluster0";
 
 mongoose
   .connect(MONGODB_URI, {
@@ -34,8 +39,7 @@ mongoose
 app.use("/api/auth", authRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/api/admin", require("./routes/admin"));
-
+app.use("/api/notification", notificationRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

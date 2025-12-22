@@ -1,8 +1,12 @@
-const jwt = require('jsonwebtoken');
+import jwt from "jsonwebtoken";
 
 const auth = (req, res, next) => {
-  // Get token from header
-  const token = req.header('x-auth-token');
+  // Get token from header.
+  // We support both legacy `x-auth-token` and standard `Authorization: Bearer <token>`.
+  const bearer = req.headers.authorization;
+  const token =
+    req.header("x-auth-token") ||
+    (bearer && bearer.startsWith("Bearer ") ? bearer.split(" ")[1] : null);
 
   // Check if no token
   if (!token) {
@@ -29,4 +33,4 @@ const auth = (req, res, next) => {
   }
 };
 
-module.exports = auth;
+export default auth;

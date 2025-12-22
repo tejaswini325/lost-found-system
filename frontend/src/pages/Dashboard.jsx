@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Bell, MessageSquare } from "lucide-react";
 import axios from "axios";
 import "./Dashboard.css";
+import { API_BASE_URL } from "../api";
 
 const Dashboard = () => {
   const userName = localStorage.getItem("userName") || "Student";
@@ -14,19 +15,30 @@ const Dashboard = () => {
   }, []);
 
   const fetchDashboardData = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
     try {
-      const token = localStorage.getItem("token");
+      const authHeaders = {
+        Authorization: `Bearer ${token}`,
+      };
+
       const [itemsRes, notifRes] = await Promise.all([
-        axios.get("http://localhost:5000/api/items/my-items", {
-          headers: { "x-auth-token": token }
+        axios.get(`${API_BASE_URL}/api/items/my-items`, {
+          headers: authHeaders,
         }),
-        axios.get("http://localhost:5000/api/notifications", {
-          headers: { "x-auth-token": token }
-        })
+        axios.get(`${API_BASE_URL}/api/notification`, {
+          headers: authHeaders,
+        }),
       ]);
 
-      if (itemsRes.data.success) setRecentItems(itemsRes.data.items.slice(0, 3));
-      if (notifRes.data.success) setNotifications(notifRes.data.notifications.slice(0, 5));
+      if (itemsRes.data?.success) {
+        setRecentItems(itemsRes.data.items.slice(0, 3));
+      }
+
+      if (notifRes.data?.success) {
+        setNotifications((notifRes.data.notifications || []).slice(0, 5));
+      }
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
     }
@@ -52,8 +64,10 @@ const Dashboard = () => {
         <div className="topbar-right">
           <Link to="/notifications" className="icon-btn">
             <Bell size={22} />
-            {notifications.filter(n => !n.read).length > 0 && (
-              <span className="badge">{notifications.filter(n => !n.read).length}</span>
+            {notifications.filter(n => !(n.isRead ?? n.read)).length > 0 && (
+              <span className="badge">
+                {notifications.filter(n => !(n.isRead ?? n.read)).length}
+              </span>
             )}
           </Link>
           <Link to="/messages" className="icon-btn">
@@ -130,7 +144,7 @@ const Dashboard = () => {
                 {notifications.map((notif) => (
                   <div
                     key={notif._id}
-                    className={`notification-item ${!notif.read ? 'unread' : ''}`}
+                    className={`notification-item ${!(notif.isRead ?? notif.read) ? 'unread' : ''}`}
                   >
                     <div className="notification-icon">
                       {notif.type === 'match' && '🔍'}

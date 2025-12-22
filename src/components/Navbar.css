@@ -53,6 +53,10 @@
 .navbar-actions {
     min-width: 100px; /* Reserves space for the button */
     text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
 }
 
 .logout-btn {
@@ -62,6 +66,105 @@
     font-family: inherit;
     font-size: inherit;
     padding: 0; /* Remove default button padding */
+}
+
+.navbar-notifications {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.notif-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+}
+
+.notif-icon-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notif-badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: #ff3b30;
+    color: white;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    line-height: 1;
+    padding: 2px 6px;
+    font-weight: 700;
+    border: 2px solid #1f3762;
+}
+
+.notif-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    width: 320px;
+    background: white;
+    color: #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    z-index: 2000;
+}
+
+.notif-header {
+    padding: 10px 12px;
+    font-weight: 700;
+    background: #f3f6fb;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.notif-list {
+    max-height: 360px;
+    overflow: auto;
+}
+
+.notif-empty {
+    padding: 14px 12px;
+    color: rgba(0,0,0,0.6);
+    text-align: left;
+}
+
+.notif-item {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+.notif-item:hover {
+    background: rgba(31, 55, 98, 0.08);
+}
+
+.notif-item.unread .notif-title {
+    font-weight: 800;
+}
+
+.notif-item.read .notif-title {
+    font-weight: 700;
+    color: rgba(0,0,0,0.75);
+}
+
+.notif-title {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+.notif-message {
+    font-size: 0.8rem;
+    color: rgba(0,0,0,0.7);
 }
 
 /* --- Responsive Adjustments --- */
@@ -100,6 +203,7 @@
         width: 100%;
         text-align: left;
         margin-top: 10px;
+        justify-content: flex-start;
     }
     
     .navbar-brand {

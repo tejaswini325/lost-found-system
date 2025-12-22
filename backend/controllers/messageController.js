@@ -1,8 +1,9 @@
-const Message = require("../models/Message");
-const Notification = require("../models/Notification");
+import Message from "../models/Message.js";
+import Notification from "../models/Notification.js";
 
 // Send message
-exports.sendMessage = async (req, res) => {
+export const sendMessage = async (req, res) => {
+
     try {
         const { receiverId, itemId, message } = req.body;
         const senderId = req.userId;
@@ -44,7 +45,8 @@ exports.sendMessage = async (req, res) => {
 };
 
 // Get conversation
-exports.getConversation = async (req, res) => {
+export const getConversation = async (req, res) => {
+
     try {
         const { otherUserId, itemId } = req.query;
         const userId = req.userId;
@@ -80,7 +82,8 @@ exports.getConversation = async (req, res) => {
 };
 
 // Get all conversations
-exports.getAllConversations = async (req, res) => {
+export const getAllConversations = async (req, res) => {
+
     try {
         const userId = req.userId;
 

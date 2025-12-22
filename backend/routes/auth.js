@@ -1,22 +1,22 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const authController = require("../controllers/authController");
-const auth = require("../middleware/auth");
+import { registerUser, loginUser, verifyEmail, resetPassword, getCurrentUser, updateProfile } from "../controllers/authController.js";
+import auth from "../middleware/auth.js";
+import User from "../models/User.js";
 
 // Public routes
-router.post("/register", authController.registerUser);
-router.post("/login", authController.loginUser); // Changed from "login" to "loginUser"
-router.post("/verify-email", authController.verifyEmail);
-router.post("/reset-password", authController.resetPassword);
+router.post("/register", registerUser);
+router.post("/login", loginUser); // Changed from "login" to "loginUser"
+router.post("/verify-email", verifyEmail);
+router.post("/reset-password", resetPassword);
 
 // Protected routes (need token)
-router.get("/me", auth, authController.getCurrentUser);
-router.put("/update", auth, authController.updateProfile);
+router.get("/me", auth, getCurrentUser);
+router.put("/update", auth, updateProfile);
 
 // Get All Users (for testing - optional)
 router.get("/all", async (req, res) => {
   try {
-    const User = require("../models/User");
     const users = await User.find().select('-password');
     res.json({
       success: true,
@@ -30,4 +30,4 @@ router.get("/all", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

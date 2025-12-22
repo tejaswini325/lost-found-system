@@ -1,7 +1,7 @@
-const Notification = require("../models/Notification");
+import Notification from "../models/Notification.js";
 
 // Get user notifications
-exports.getNotifications = async (req, res) => {
+export const getNotifications = async (req, res) => {
     try {
         const notifications = await Notification.find({ userId: req.userId })
             .sort({ createdAt: -1 })
@@ -10,7 +10,10 @@ exports.getNotifications = async (req, res) => {
         // Count unread
         const unreadCount = await Notification.countDocuments({
             userId: req.userId,
-            read: false
+            $or: [
+                { isRead: false },
+                { read: false }
+            ]
         });
 
         res.json({
@@ -27,17 +30,21 @@ exports.getNotifications = async (req, res) => {
 };
 
 // Mark as read
-exports.markAsRead = async (req, res) => {
+export const markAsRead = async (req, res) => {
     try {
         const { notificationId } = req.body;
 
         await Notification.findByIdAndUpdate(notificationId, {
+            isRead: true,
             read: true
         });
 
         const unreadCount = await Notification.countDocuments({
             userId: req.userId,
-            read: false
+            $or: [
+                { isRead: false },
+                { read: false }
+            ]
         });
 
         res.json({
@@ -53,11 +60,17 @@ exports.markAsRead = async (req, res) => {
 };
 
 // Mark all as read
-exports.markAllAsRead = async (req, res) => {
+export const markAllAsRead = async (req, res) => {
     try {
         await Notification.updateMany(
-            { userId: req.userId, read: false },
-            { read: true }
+            {
+                userId: req.userId,
+                $or: [
+                    { isRead: false },
+                    { read: false }
+                ]
+            },
+            { isRead: true, read: true }
         );
 
         res.json({
@@ -73,7 +86,7 @@ exports.markAllAsRead = async (req, res) => {
 };
 
 // Delete notification
-exports.deleteNotification = async (req, res) => {
+export const deleteNotification = async (req, res) => {
     try {
         const { notificationId } = req.params;
 

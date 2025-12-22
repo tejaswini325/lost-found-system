@@ -10,6 +10,7 @@ const ReportItem = () => {
         location: '',
         date: '',
         image: null,
+        itemType: '',
     });
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ const ReportItem = () => {
         data.append('description', formData.description);
         data.append('location', formData.location);
         data.append('date', formData.date);
+        data.append('itemType', formData.itemType);
         if (formData.image) {
             data.append('image', formData.image);
         }
@@ -64,6 +66,7 @@ const ReportItem = () => {
                     location: '',
                     date: '',
                     image: null,
+                    itemType: '',
                 });
                 const fileInput = document.querySelector('input[type="file"]');
                 if (fileInput) fileInput.value = '';
@@ -107,6 +110,28 @@ const ReportItem = () => {
                         placeholder="e.g., Water Bottle, Wallet, Keys"
                         required
                     />
+                </div>
+                <div className="form-group">
+                    <label>Item Type *</label>
+                    <select name="itemType" value={formData.itemType} onChange={handleChange} required>
+                        <option value="">Select Type</option>
+                        <option value="Wallet">Wallet</option>
+                        <option value="Phone">Phone</option>
+                        <option value="Keys">Keys</option>
+                        <option value="Bag">Bag</option>
+                        <option value="Jewelry">Jewelry</option>
+                        <option value="Watch">Watch</option>
+                        <option value="Glasses">Glasses</option>
+                        <option value="Headphones">Headphones</option>
+                        <option value="Laptop">Laptop</option>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Book">Book</option>
+                        <option value="ID Card">ID Card</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Water Bottle">Water Bottle</option>
+                        <option value="Umbrella">Umbrella</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
 
                 <div className="form-group">

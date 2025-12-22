@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const notificationSchema = new mongoose.Schema({
     userId: {
@@ -13,7 +13,16 @@ const notificationSchema = new mongoose.Schema({
     },
     title: { type: String, required: true },
     message: { type: String, required: true },
+    matchId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Match',
+        default: null
+    },
     data: { type: mongoose.Schema.Types.Mixed, default: {} },
+    // We store isRead to match the required notifications schema.
+    // We also keep the legacy `read` field because older records and parts of the UI
+    // may still rely on it. Controllers should query/update both to stay consistent.
+    isRead: { type: Boolean, default: false },
     read: { type: Boolean, default: false },
     priority: {
         type: String,
@@ -22,4 +31,4 @@ const notificationSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-module.exports = mongoose.model("Notification", notificationSchema);
+export default mongoose.model("Notification", notificationSchema);

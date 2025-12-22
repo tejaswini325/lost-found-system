@@ -1,15 +1,16 @@
-const express = require("express");
-const router = express.Router();
-const adminMiddleware = require("../middleware/admin");
-
-const {
+import express from "express";
+import adminMiddleware from "../middleware/admin.js";
+import {
   loginAdmin,
   getDashboardStats,
   getRecentActivities,
   getAllUsers,
   getAllItems,
-  updateItemStatus
-} = require("../controllers/adminController");
+  updateItemStatus,
+  verifyReturn
+} from "../controllers/adminController.js";
+
+const router = express.Router();
 
 router.post("/login", loginAdmin);
 
@@ -20,5 +21,6 @@ router.get("/users", adminMiddleware, getAllUsers);
 
 router.get("/items", adminMiddleware, getAllItems);
 router.put("/items/:id/status", adminMiddleware, updateItemStatus);
+router.post("/items/:id/verify-return", adminMiddleware, verifyReturn);
 
-module.exports = router;
+export default router;

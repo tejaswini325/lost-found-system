@@ -1,62 +1,72 @@
-const express = require("express");
+import express from "express";
+import multer from "multer";
+import path from "path";
+
+import {
+  reportItem,
+  getUserItems,
+  getAllItems,
+  getItemById,
+  claimItem,
+  markAsReturned,
+  getStats,
+  debugAllItems,
+  testUserItems,
+} from "../controllers/itemController.js";
+import auth from "../middleware/auth.js";
+
 const router = express.Router();
-const itemController = require("../controllers/itemController");
-const auth = require("../middleware/auth");
-const multer = require("multer");
-const path = require("path");
 
 // Configure multer for image uploads
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + path.extname(file.originalname));
-    }
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
 });
 
 const upload = multer({
-    storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
-    fileFilter: (req, file, cb) => {
-        const filetypes = /jpeg|jpg|png|gif/;
-        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-        const mimetype = filetypes.test(file.mimetype);
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  fileFilter: (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = filetypes.test(file.mimetype);
 
-        if (mimetype && extname) {
-            return cb(null, true);
-        } else {
-            cb(new Error('Only image files are allowed'));
-        }
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb(new Error("Only image files are allowed"));
     }
+  },
 });
 
 // Report item with image upload
-router.post("/add", auth, upload.single('image'), itemController.reportItem);
+router.post("/add", auth, upload.single("image"), reportItem);
 
 // Get user's items
-router.get("/my-items", auth, itemController.getUserItems);
+router.get("/my-items", auth, getUserItems);
 
 // Get all items (public)
-router.get("/all", itemController.getAllItems);
+router.get("/all", getAllItems);
 
 // Get item by ID
-router.get("/:id", itemController.getItemById);
+router.get("/:id", getItemById);
 
 // Claim item
-router.post("/claim", auth, itemController.claimItem);
+router.post("/claim", auth, claimItem);
 
 // Mark as returned
-router.post("/return", auth, itemController.markAsReturned);
+router.post("/return", auth, markAsReturned);
 
 // Get stats
-router.get("/stats/my", auth, itemController.getStats);
+router.get("/stats/my", auth, getStats);
 
-// === ADD THIS LINE FOR DEBUGGING ===
-router.get("/debug/all", itemController.debugAllItems);
-// Add this line in your routes/items.js
-router.get("/test/my-items", auth, itemController.testUserItems);
-// ===================================
+// Debug routes
+router.get("/debug/all", debugAllItems);
+router.get("/test/my-items", auth, testUserItems);
 
-module.exports = router;
+export default router;
