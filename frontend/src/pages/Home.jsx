@@ -9,17 +9,13 @@ const Home = () => {
     const [theme, setTheme] = useState('dark'); 
     
     // UI State: Controls the visibility of the theme menu dropdown
-    const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
+    const [, setIsThemeMenuOpen] = useState(false);
     
     // NEW STATE: Controls the visibility of the settings menu dropdown
     const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState(false);
 
     // Toggles the theme menu visibility
-    const toggleThemeMenu = () => {
-        // Close settings menu if open
-        setIsSettingsMenuOpen(false);
-        setIsThemeMenuOpen(prev => !prev);
-    };
+    
 
     // NEW HANDLER: Toggles the settings menu visibility
     const toggleSettingsMenu = () => {
@@ -29,10 +25,7 @@ const Home = () => {
     };
     
     // Handler for selecting a theme
-    const selectTheme = (themeName) => {
-        setTheme(themeName);
-        setIsThemeMenuOpen(false); // Close the menu after selection
-    };
+    
     
     // Handler for selecting a settings option
     const handleSettingsClick = (option) => {

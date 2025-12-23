@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { Send, ArrowLeft } from "lucide-react";
 import { fetchConversations, fetchMessages, sendMessage } from "../api/messageApi";
@@ -69,7 +69,7 @@ const Messages = () => {
     if (otherUserId) {
       loadMessages(otherUserId);
     }
-  }, [otherUserId, location.search]);
+  }, [otherUserId, location.search, loadMessages]);
 
   useEffect(() => {
     scrollToBottom();

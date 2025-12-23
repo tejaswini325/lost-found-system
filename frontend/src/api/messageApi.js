@@ -73,7 +73,7 @@ export const markAsRead = async (conversationId) => {
   try {
     // No explicit mark-read endpoint in current backend.
     // Messages are marked read when fetching the conversation.
-    return;
+    // This function is a placeholder for future implementation.
   } catch (error) {
     console.error('Error marking messages as read:', error);
     throw error;

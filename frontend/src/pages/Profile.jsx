@@ -159,10 +159,7 @@ const Profile = () => {
         }
     };
 
-    const handleLogout = () => {
-        localStorage.clear();
-        navigate("/login1");
-    };
+    
 
     if (loading) {
         return (
