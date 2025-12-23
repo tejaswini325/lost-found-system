@@ -4,6 +4,19 @@
   text-align: center;
 }
 
+/* Hide calendar icon from date inputs */
+input[type="date"]::-webkit-calendar-indicator {
+  display: none;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+input[type="date"]::-webkit-outer-spin-button {
+  display: none;
+}
+
 .loading {
   text-align: center;
   padding: 2rem;

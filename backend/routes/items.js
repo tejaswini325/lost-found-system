@@ -53,6 +53,12 @@ router.get("/my-items", auth, getUserItems);
 // Get all items (public)
 router.get("/all", getAllItems);
 
+// Get lost items specifically
+router.get("/lost", getAllItems);
+
+// Get found items specifically  
+router.get("/found", getAllItems);
+
 // Get item by ID
 router.get("/:id", getItemById);
 

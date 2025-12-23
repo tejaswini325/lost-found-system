@@ -55,8 +55,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
+    "bugs": {
     "url": "https://github.com/tejumv/lost-found-system/issues"
   },
   "homepage": "https://github.com/tejumv/lost-found-system#readme"

@@ -14,6 +14,18 @@
 
 }
 
+/* Hide calendar icon from date inputs */
+input[type="date"]::-webkit-calendar-indicator {
+  display: none;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+input[type="date"]::-webkit-outer-spin-button {
+  display: none;
+}
 
 
 .report-container h2 {

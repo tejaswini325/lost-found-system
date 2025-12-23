@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap");
 
 :root {
   --notif-bg: #f3f5f8;
@@ -12,7 +12,7 @@
 }
 
 .notifications-page {
-  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-family: "Montserrat", sans-serif;
   min-height: calc(100vh - 120px);
   padding: 40px clamp(20px, 5vw, 60px);
   background: var(--notif-bg);
