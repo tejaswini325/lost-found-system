@@ -15,6 +15,8 @@ import Notifications from "./pages/Notifications";
 import Footbar from "./components/Footbar";
 import Login1 from "./pages/Login1";
 import MyItems from "./pages/MyItems";
+import Messages from "./pages/Messages";
+import ItemDetail from "./pages/ItemDetail";
 
 // Navbar Component
 import Navbar from "./components/Navbar";
@@ -51,6 +53,7 @@ function AppContent() {
         <Route path="/found" element={<Found />} />
         <Route path="/found-items" element={<Found />} />
         <Route path="/items" element={<Items />} />
+        <Route path="/item/:id" element={<ItemDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/login1" element={<Login1 />} />
         <Route path="/contact" element={<HelpForm />} />
@@ -93,6 +96,22 @@ function AppContent() {
           element={
             <PrivateRoute>
               <Notifications />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/messages"
+          element={
+            <PrivateRoute>
+              <Messages />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/messages/:otherUserId"
+          element={
+            <PrivateRoute>
+              <Messages />
             </PrivateRoute>
           }
         />

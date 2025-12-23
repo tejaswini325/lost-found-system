@@ -10,6 +10,7 @@ import authRoutes from "./routes/auth.js";
 import itemRoutes from "./routes/items.js";
 import adminRoutes from "./routes/admin.js";
 import notificationRoutes from "./routes/Notification.js";
+import messageRoutes from "./routes/messages.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,6 +41,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/notification", notificationRoutes);
+app.use("/api/messages", messageRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

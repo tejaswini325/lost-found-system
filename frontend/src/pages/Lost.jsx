@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../api";
+import { useNavigate } from "react-router-dom";
+import MessageButton from "../components/MessageButton";
 import "./Lost.css";
 
 function Lost() {
+  const navigate = useNavigate();
   const [lostItems, setLostItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     fetchLostItems();
@@ -64,7 +68,16 @@ function Lost() {
       ) : (
         <div className="lost-items-grid">
           {lostItems.map((item) => (
-            <div key={item._id} className="lost-item-card">
+            <div
+              key={item._id}
+              className="lost-item-card"
+              onClick={() => navigate(`/item/${item._id}`)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") navigate(`/item/${item._id}`);
+              }}
+            >
               <div className="item-header">
                 <h3>{item.title}</h3>
                 <span className="status-badge lost">Lost</span>
@@ -92,6 +105,14 @@ function Lost() {
                   </div>
                 </div>
               </div>
+
+              {item.userId && item.userId !== userId && (
+                <MessageButton
+                  itemId={item._id}
+                  ownerId={item.userId}
+                  className="card-message-button"
+                />
+              )}
             </div>
           ))}
         </div>

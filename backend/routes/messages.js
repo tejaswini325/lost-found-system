@@ -1,15 +1,20 @@
-const express = require("express");
+import express from "express";
+import auth from "../middleware/auth.js";
+import {
+  sendMessage,
+  getConversation,
+  getAllConversations,
+} from "../controllers/messageController.js";
+
 const router = express.Router();
-const messageController = require("../controllers/messageController");
-const auth = require("../middleware/auth");
 
 // Send message
-router.post("/send", auth, messageController.sendMessage);
+router.post("/send", auth, sendMessage);
 
-// Get conversation
-router.get("/conversation", auth, messageController.getConversation);
+// Get conversation (expects query params: otherUserId, optional itemId)
+router.get("/conversation", auth, getConversation);
 
 // Get all conversations
-router.get("/conversations", auth, messageController.getAllConversations);
+router.get("/conversations", auth, getAllConversations);
 
-module.exports = router;
+export default router;

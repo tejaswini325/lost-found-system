@@ -1,11 +1,36 @@
 // src/components/Navbar.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { MessageSquare } from 'lucide-react';
 import './Navbar.css'; // Importing the final CSS styles
 import collegeLogo from '../assets/idVTKeb2gc_logos.jpeg'; // Assuming your college logo path
+import { getUnreadCount } from '../api/messageApi';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [unreadCount, setUnreadCount] = useState(0);
+
+    useEffect(() => {
+        let mounted = true;
+
+        const refresh = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) return;
+                const count = await getUnreadCount();
+                if (mounted) setUnreadCount(count);
+            } catch {
+                // ignore
+            }
+        };
+
+        refresh();
+        const interval = setInterval(refresh, 30000);
+        return () => {
+            mounted = false;
+            clearInterval(interval);
+        };
+    }, []);
 
     const handleLogout = () => {
         // Clear authentication token and redirect to login
@@ -27,8 +52,14 @@ const Navbar = () => {
                 <Link to="/found-items" className="nav-link">FOUND ITEMS</Link>
             </div>
             
-            {/* Right side: Logout Button */}
+            {/* Right side: Messages + Logout */}
             <div className="navbar-actions">
+                <Link to="/messages" className="nav-icon" aria-label="Messages">
+                    <MessageSquare size={20} />
+                    {unreadCount > 0 && (
+                        <span className="nav-badge">{unreadCount > 9 ? '9+' : unreadCount}</span>
+                    )}
+                </Link>
                 <button onClick={handleLogout} className="nav-link logout-btn">LOGOUT</button>
             </div>
         </nav>
