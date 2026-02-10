@@ -97,25 +97,50 @@ The Lost & Found Management System includes the following advanced features:
 ---
 ## 📸 Screenshots
 
-### 🏠 Home Page
+### 🏠 Login Page
+![Home Page](screenshots/home.png)
+
+**Description:**  
+Displays the main landing page of the Lost & Found Management System with navigation options.
+
+--- 
+
+### 🏠 Registration Page
+![Home Page](screenshots/r.png)
+
 **Description:**  
 Displays the main landing page of the Lost & Found Management System with navigation options.
 
 ---
 
+### 🏠 Login Page
+![Home Page](screenshots/login.png)
+
+**Description:**  
+Displays the main landing page of the Lost & Found Management System with navigation options.
+
+
+---
+
 ### 📝 Report Lost Item Page
+![Report Lost Item](screenshots/report-lost.png)
+
 **Description:**  
 Allows users to submit details of lost items such as item name, category, description, and date.
 
 ---
 
 ### 📦 Report Found Item Page
+![Report Found Item](screenshots/report-found.png)
+
 **Description:**  
 Enables users to register found items along with relevant identifying information.
 
 ---
 
 ### 🔍 Search & Match Page
+![Search Page](screenshots/search.png)
+
 **Description:**  
 Provides search functionality to find matching lost or found items using keywords or categories.
 
