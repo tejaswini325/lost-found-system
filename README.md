@@ -97,33 +97,36 @@ The Lost & Found Management System includes the following advanced features:
 ---
 ## 📸 Screenshots
 
-### 🏠 Login Page
-![Home Page](screenshots/home.png)
+### 🏠 Home Page
 
 **Description:**  
-Displays the main landing page of the Lost & Found Management System with navigation options.
+Displays the real-time updated dashboard of the user.
 
---- 
+---
 
-### 🏠 Registration Page
-![Home Page](screenshots/r.png)
+### 🔒 Login Page
 
-**Description:**  
+ **Description:**
 Displays the main landing page of the Lost & Found Management System with navigation options.
 
 ---
 
-### 🏠 Login Page
-![Home Page](screenshots/login.png)
+### ® Registration Page
 
 **Description:**  
-Displays the main landing page of the Lost & Found Management System with navigation options.
+Allows new KLETECH users to create an account and register for the platform.
+
+---
+
+### 📶 Dashboard Page
+
+**Description:**  
+Displays the real-time updated dashboard of the user.
 
 
 ---
 
 ### 📝 Report Lost Item Page
-![Report Lost Item](screenshots/report-lost.png)
 
 **Description:**  
 Allows users to submit details of lost items such as item name, category, description, and date.
@@ -131,7 +134,6 @@ Allows users to submit details of lost items such as item name, category, descri
 ---
 
 ### 📦 Report Found Item Page
-![Report Found Item](screenshots/report-found.png)
 
 **Description:**  
 Enables users to register found items along with relevant identifying information.
@@ -139,7 +141,6 @@ Enables users to register found items along with relevant identifying informatio
 ---
 
 ### 🔍 Search & Match Page
-![Search Page](screenshots/search.png)
 
 **Description:**  
 Provides search functionality to find matching lost or found items using keywords or categories.
