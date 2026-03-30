@@ -74,7 +74,7 @@ The system follows a layered architecture:
 ## 🚀 Installation & Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/lost-found-system.git
+   git clone https://github.com/tejaswini325/lost-found-system.git
    ```
 2. Navigate to project directory:
    ```bash
@@ -155,6 +155,6 @@ The work presented is original and intended solely for educational purposes.
 ---
 
 ## 👩‍💻 Authors
-**Student Name:** Tejaswini M V, Manjula Nayak, Rakshita R T, Soujanya Tikare 
+Tejaswini M V, Manjula Nayak, Rakshita R T, Soujanya Tikare 
 **Institution:** KLE Technological University, Hubballi  
 
