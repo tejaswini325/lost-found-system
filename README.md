@@ -95,7 +95,7 @@ The Lost & Found Management System includes the following advanced features:
 - AI-based intelligent matching of lost and found items  
 
 ---
-## 📸 Screenshots
+## 📸 Pages Description
 
 ### 🏠 Home Page
 
@@ -155,6 +155,6 @@ The work presented is original and intended solely for educational purposes.
 ---
 
 ## 👩‍💻 Authors
-Tejaswini M V, Manjula Nayak, Rakshita R T, Soujanya Tikare 
+Tejaswini M V, Manjula Nayak, Rakshita R T, Soujanya Tikare<br></br>
 **Institution:** KLE Technological University, Hubballi  
 
