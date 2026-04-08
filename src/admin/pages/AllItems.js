@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import AdminLayout from '../layout/AdminLayout';
 import { adminService } from '../services/adminService';
 import { FaSearch, FaFilter, FaEye } from 'react-icons/fa';
@@ -14,15 +14,11 @@ function AllItems() {
     status: '',
     page: 1,
     limit: 10
-    
   });
   const [pagination, setPagination] = useState(null);
 
-  useEffect(() => {
-    fetchItems();
-  }, [filters.page, filters.type, filters.status]);
-
-  const fetchItems = async () => {
+  // ✅ Wrapped in useCallback (fix for dependency warning + performance)
+  const fetchItems = useCallback(async () => {
     try {
       setLoading(true);
       const response = await adminService.getAllItems(filters);
@@ -36,12 +32,17 @@ function AllItems() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters]);
 
+  // ✅ Added search dependency properly
+  useEffect(() => {
+    fetchItems();
+  }, [fetchItems]);
+
+  // ✅ Removed manual fetch call (avoids duplicate API calls)
   const handleSearch = (e) => {
     e.preventDefault();
     setFilters(prev => ({ ...prev, page: 1 }));
-    fetchItems();
   };
 
   const handleFilterChange = (e) => {
@@ -59,9 +60,13 @@ function AllItems() {
               type="text"
               placeholder="Search items..."
               value={filters.search}
-              onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
+              onChange={(e) =>
+                setFilters(prev => ({ ...prev, search: e.target.value }))
+              }
             />
-            <button type="submit" className="btn btn-primary"><FaSearch /></button>
+            <button type="submit" className="btn btn-primary">
+              <FaSearch />
+            </button>
           </form>
         </div>
       </div>
@@ -106,29 +111,43 @@ function AllItems() {
                 <tr key={item._id}>
                   <td>
                     <div className="item-cell">
-                      {item.image && <img src={item.image} alt={item.title} className="item-thumb" />}
+                      <img
+                        src={item.image || "/placeholder.png"}
+                        alt={item.title}
+                        className="item-thumb"
+                      />
                       <div>
                         <strong>{item.title}</strong>
-                        <p className="text-muted">{item.description?.substring(0, 50)}...</p>
+                        <p className="text-muted">
+                          {item.description
+                            ? item.description.substring(0, 50) + "..."
+                            : ""}
+                        </p>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <span className={`badge badge-${item.type}`}>{item.type}</span>
+                    <span className={`badge badge-${item.type || 'default'}`}>
+                      {item.type}
+                    </span>
                   </td>
                   <td>
                     {item.reportedBy?.name || 'Unknown'}
                     <br />
                     <small>{item.reportedBy?.email}</small>
                   </td>
-                  <td>{new Date(item.createdAt).toLocaleDateString()}</td>
+                  <td>
+                    {new Date(item.createdAt).toLocaleDateString()}
+                  </td>
                   <td>
                     <span className={`status-badge status-${item.status}`}>
                       {item.status}
                     </span>
                   </td>
                   <td>
-                    <button className="btn-icon" title="View Details"><FaEye /></button>
+                    <button className="btn-icon" title="View Details">
+                      <FaEye />
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -141,14 +160,22 @@ function AllItems() {
         <div className="pagination">
           <button
             disabled={pagination.page === 1}
-            onClick={() => setFilters(prev => ({ ...prev, page: prev.page - 1 }))}
+            onClick={() =>
+              setFilters(prev => ({ ...prev, page: prev.page - 1 }))
+            }
           >
             Previous
           </button>
-          <span>Page {pagination.page} of {pagination.pages}</span>
+
+          <span>
+            Page {pagination.page} of {pagination.pages}
+          </span>
+
           <button
             disabled={pagination.page === pagination.pages}
-            onClick={() => setFilters(prev => ({ ...prev, page: prev.page + 1 }))}
+            onClick={() =>
+              setFilters(prev => ({ ...prev, page: prev.page + 1 }))
+            }
           >
             Next
           </button>
@@ -159,4 +186,3 @@ function AllItems() {
 }
 
 export default AllItems;
-
