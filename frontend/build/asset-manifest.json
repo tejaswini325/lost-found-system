@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.488b0a05.css",
+    "main.js": "/static/js/main.48728602.js",
+    "static/js/453.d7446e4a.chunk.js": "/static/js/453.d7446e4a.chunk.js",
+    "static/media/kletechbvb_cover.jpeg": "/static/media/kletechbvb_cover.08870b9a003e8c8d46f1.jpeg",
+    "static/media/book-stack.svg": "/static/media/book-stack.ea51a20158bd5ea199765ebd7c8e8565.svg",
+    "static/media/university.svg": "/static/media/university.771a40e10901e95729ce9a6b639e5647.svg",
+    "static/media/calendar.svg": "/static/media/calendar.67aa43dee1a98f264e004b253e0b7666.svg",
+    "static/media/graduate-hat.svg": "/static/media/graduate-hat.2bf90a8ba4c09b6ee04359b9cdbf4a82.svg",
+    "static/media/communication.svg": "/static/media/communication.e64ba7e5768ce36f04b8e15f9b47b723.svg",
+    "static/media/idVTKeb2gc_logos.jpeg": "/static/media/idVTKeb2gc_logos.8e4a1862d0bea53f6eb8.jpeg",
+    "static/media/logo.png": "/static/media/logo.04c37f9ca05f447428aa.png",
+    "static/media/phone.svg": "/static/media/phone.c440f42b2bbdead5146ae89b047fc889.svg",
+    "static/media/user.svg": "/static/media/user.322c035df2989d96409a103419ede76f.svg",
+    "index.html": "/index.html",
+    "main.488b0a05.css.map": "/static/css/main.488b0a05.css.map",
+    "main.48728602.js.map": "/static/js/main.48728602.js.map",
+    "453.d7446e4a.chunk.js.map": "/static/js/453.d7446e4a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.488b0a05.css",
+    "static/js/main.48728602.js"
+  ]
+}

@@ -1,0 +1,10 @@
+.footer {
+  width: 100%;
+  background-color: #0a0f24; /* dark navy */
+  color: #5f93c7;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 18px;
+  margin-top: 0px; /* space from dashboard content */
+  position: normal; /* normal flow */
+}
