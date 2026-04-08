@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import AdminLayout from '../layout/AdminLayout';
 import { adminService } from '../services/adminService';
-import { FaSearch, FaFilter, FaEye } from 'react-icons/fa';
 import '../styles/Admin.css';
 
 function AllItems() {
