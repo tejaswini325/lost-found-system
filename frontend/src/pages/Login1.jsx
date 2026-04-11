@@ -48,7 +48,7 @@ const Login1 = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("${API_BASE_URL}/api/auth/login", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -103,7 +103,7 @@ const Login1 = () => {
 
     try {
       // First verify the email exists
-      const response = await fetch("${API_BASE_URL}/api/auth/verify-email", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/verify-email`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -149,7 +149,7 @@ const Login1 = () => {
     setForgotPasswordLoading(true);
 
     try {
-      const response = await fetch("${API_BASE_URL}/api/auth/reset-password", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/reset-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
