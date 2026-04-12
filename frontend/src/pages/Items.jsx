@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react"; // Added useCal
 import { Search, MapPin, Calendar, Tag } from "lucide-react"; // Removed Filter import
 import axios from "axios";
 import "./Items.css";
-
+import { API_BASE_URL } from '../api.js';
 const Items = () => {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
@@ -67,7 +67,7 @@ const Items = () => {
   const fetchAllItems = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/api/items/all", {
+      const response = await axios.get(`${API_BASE_URL}/api/items/all`, {
         headers: { "x-auth-token": token }
       });
 
@@ -171,7 +171,7 @@ const Items = () => {
 
               <div className="item-image">
                 {item.image ? (
-                  <img src={`http://localhost:5000${item.image}`} alt={item.title} />
+                  <img src={`${API_BASE_URL}${item.image}`} alt={item.title} />
                 ) : (
                   <div className="no-image">No Image</div>
                 )}
