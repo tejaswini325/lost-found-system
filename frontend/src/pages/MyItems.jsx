@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Search, MapPin, Calendar, Tag, Filter, Eye, CheckCircle, Clock } from "lucide-react";
 import axios from "axios";
 import "./MyItems.css";
-
+import { API_BASE_URL } from '../api.js';
 const MyItems = () => {
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
@@ -51,7 +51,7 @@ const MyItems = () => {
     const fetchMyItems = async () => {
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get("http://localhost:5000/api/items/my-items", {
+            const response = await axios.get(`${API_BASE_URL}/api/items/my-items`, {
                 headers: { "x-auth-token": token }
             });
 
@@ -209,7 +209,7 @@ const MyItems = () => {
                                         <div className="item-info">
                                             <div className="item-image-small">
                                                 {item.image ? (
-                                                    <img src={`http://localhost:5000${item.image}`} alt={item.title} />
+                                                    <img src={`${API_BASE_URL}${item.image}`} alt={item.title} />
                                                 ) : (
                                                     <div className="no-image-small">No Image</div>
                                                 )}
