@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Upload, MapPin, Calendar, Tag, Smartphone, Info, AlertCircle } from 'lucide-react';
 import './ReportItem.css';
-
+import { API_BASE_URL } from '../api.js'; 
 const ReportItem = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -187,7 +187,7 @@ const ReportItem = () => {
         data.append('image', formData.image);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/items/add', data, {
+            const response = await axios.post(`${API_BASE_URL}/api/items/add`, data, {
                 headers: {
                     'x-auth-token': token,
                     'Content-Type': 'multipart/form-data',
