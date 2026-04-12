@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 import logoImage from "../assets/logo.png";
-
+import { API_BASE_URL } from '../api.js';
 export default function Login() {
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ export default function Login() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
+        `${API_BASE_URL}/api/auth/register`,
         {
           ...formData,
           phone: formData.mobile
