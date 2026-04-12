@@ -199,7 +199,7 @@ const MyItems = () => {
                                 <th>Location</th>
                                 <th>Date</th>
                                 <th>Status</th>
-                                <th>Actions</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -251,19 +251,7 @@ const MyItems = () => {
                                             <span>{getStatusText(item.status)}</span>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div className="action-buttons">
-                                            <Link to={`/item/${item._id}`} className="view-btn">
-                                                <Eye size={16} />
-                                                View
-                                            </Link>
-                                            {item.status === 'pending' && (
-                                                <button className="edit-btn">
-                                                    Edit
-                                                </button>
-                                            )}
-                                        </div>
-                                    </td>
+                                    
                                 </tr>
                             ))}
                         </tbody>
