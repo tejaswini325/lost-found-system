@@ -9,7 +9,7 @@ import mail from './communication.svg'; // This imports as URL
 import calendar from './calendar.svg'; // This imports as URL
 import books from './book-stack.svg'; // This imports as URL
 import building from './university.svg'; // This imports as URL
-
+import { API_BASE_URL } from '../api.js'; 
 const Profile = () => {
     const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const Profile = () => {
                 return;
             }
 
-            const response = await axios.get("http://localhost:5000/api/auth/me", {
+            const response = await axios.get(`${API_BASE_URL}/api/auth/me`, {
                 headers: { "x-auth-token": token }
             });
 
@@ -125,7 +125,7 @@ const Profile = () => {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.put(
-                "http://localhost:5000/api/auth/update",
+               `${API_BASE_URL}/api/auth/update`,
                 editData,
                 {
                     headers: { "x-auth-token": token },
