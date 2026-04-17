@@ -18,7 +18,12 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ["https://lost-found-system-puce.vercel.app", "http://localhost:3000"],
+  origin: [
+    "https://lost-found-system-puce.vercel.app",     // user frontend
+    "https://lost-found-system-puce.vercel.app/admin",          // ADD THIS - admin frontend URL
+    "https://lost-found-system-p9dw.onrender.com",                            // user local
+    "https://lost-found-system-p9dw.onrender.com"                             // ADD THIS - admin local
+  ],
   credentials: true
 }));
 app.use(express.json());
