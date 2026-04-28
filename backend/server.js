@@ -22,7 +22,8 @@ app.use(cors({
     "https://lost-found-system-puce.vercel.app",     // user frontend
     "https://lost-found-system-puce.vercel.app/admin",          // ADD THIS - admin frontend URL
     "https://lost-found-system-p9dw.onrender.com",                            // user local
-    "https://lost-found-system-p9dw.onrender.com"                             // ADD THIS - admin local
+    "https://lost-found-system-p9dw.onrender.com",
+    "http://3.236.51.71:3000"// ADD THIS - admin local
   ],
   credentials: true
 }));
