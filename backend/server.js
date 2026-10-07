@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Database Connection
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGO_URI;
 mongoose
   .connect(MONGODB_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
